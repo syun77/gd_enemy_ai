@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "// CanvasItemのシェーダーであることを宣言
+shader_type canvas_item;
+
+uniform vec3 col = vec3(1.0, 1.0, 1.0);
+
+// フラグメントシェーダー
+void fragment() {
+    // 色を取得
+    vec4 color = texture(TEXTURE, UV);
+    // アルファ値以外を置き換える
+    color.rgb = col;
+    // 反映
+    COLOR = color;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/col = Vector3( 1, 1, 1 )

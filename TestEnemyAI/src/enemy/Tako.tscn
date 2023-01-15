@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/enemy/Tako.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/enemy/tako.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float time;
+
+// ラスタースクロールする
+void fragment() {
+    float u = UV.x + 0.5 * sin(UV.y*time);
+    vec2 uv = vec2(u, UV.y);
+    COLOR = texture(TEXTURE, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/time = 0.0
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 54.0
+
+[node name="Tako" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_Tako_area_entered"]

@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "// CanvasItemのシェーダーであることを宣言
+shader_type canvas_item;
+
+// UV値のオフセット値
+uniform vec2 ofs_uv;
+
+// フラグメントシェーダー
+void fragment() {
+    // 色を取得
+    vec4 color = texture(TEXTURE, UV+ofs_uv);
+
+    // 反映
+    COLOR = color;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/ofs_uv = Vector2( 0, 0 )
