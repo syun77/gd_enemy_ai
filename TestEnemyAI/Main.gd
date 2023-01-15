@@ -27,3 +27,13 @@ func _update_bg(delta:float) -> void:
 	_bg_back.offset += (back_ofs - _bg_back.offset) * delta * 3
 	_bg_sky.offset += (sky_ofs - _bg_sky.offset) * delta * 3
 
+
+
+func _on_CheckBox_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		Common.tracking = Common.eTracking.ALWAYS
+
+
+func _on_CheckBox2_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		Common.tracking = Common.eTracking.INTERVAL

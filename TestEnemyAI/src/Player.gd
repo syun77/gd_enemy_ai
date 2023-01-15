@@ -21,6 +21,8 @@ const SHOT_INTERVAL = 60 * 2
 # ----------------------------------------
 var _target = Vector2.ZERO
 var _velocity = Vector2.ZERO
+var _last_direction = Vector2.ZERO
+var _vel_dash = Vector2.ZERO
 var _timer = 0.0
 var _ghost_list = []
 var _is_left = false
@@ -65,7 +67,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_down"):
 		v += Vector2.DOWN
 	v = v.normalized()
-	_velocity = v * MOVE_SPEED * delta
+	_last_direction = v
+	
+	_vel_dash *= 0.95
+	if Input.is_action_just_pressed("ui_dash"):
+		# 加速.
+		_vel_dash = _last_direction * 1000
+	
+	_velocity = (v * MOVE_SPEED + _vel_dash) * delta
 
 	position += _velocity
 	if position.x < 0:

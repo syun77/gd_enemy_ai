@@ -1,9 +1,29 @@
 extends Node
 
+# -------------------------------------
+# consts.
+# -------------------------------------
+# 追跡型.
+enum eTracking {
+	ALWAYS,
+	INTERVAL,	
+}
+
+# -------------------------------------
+# public vars.
+# -------------------------------------
+var tracking = eTracking.ALWAYS
+
+# -------------------------------------
+# private vars.
+# -------------------------------------
 var _target:Player = null
 var _target_pos = Vector2.ZERO
 var _layers = {}
 
+# -------------------------------------
+# public functions.
+# -------------------------------------
 func set_target(t:Player) -> void:
 	_target = t
 func is_valid_target() -> bool:
@@ -24,3 +44,7 @@ func set_layer(layers) -> void:
 	_layers = layers
 func get_layer(name:String) -> CanvasLayer:
 	return _layers[name]
+
+# -------------------------------------
+# private functions.
+# -------------------------------------

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/images/bg_sky.png" type="Texture" id=1]
 [ext_resource path="res://assets/images/bg_back.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Main.gd" type="Script" id=4]
 [ext_resource path="res://src/enemy/Tako.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/tres/radio.tres" type="Theme" id=6]
+[ext_resource path="res://assets/tres/radio_group.tres" type="ButtonGroup" id=7]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -32,32 +33,45 @@ position = Vector2( 96, 192 )
 [node name="Tako" parent="EnemyLayer" instance=ExtResource( 5 )]
 position = Vector2( 528, 392 )
 
+[node name="Tako2" parent="EnemyLayer" instance=ExtResource( 5 )]
+position = Vector2( 769, 206 )
+
+[node name="Tako3" parent="EnemyLayer" instance=ExtResource( 5 )]
+position = Vector2( 678, 465 )
+
 [node name="ShotLayer" type="CanvasLayer" parent="."]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer"]
+[node name="TrackingRadio" type="VBoxContainer" parent="UILayer"]
 margin_left = 896.0
 margin_top = 8.0
 margin_right = 1012.0
 margin_bottom = 142.0
 
-[node name="CheckBox" type="CheckBox" parent="UILayer/VBoxContainer"]
-margin_right = 116.0
+[node name="CheckBox" type="CheckBox" parent="UILayer/TrackingRadio"]
+margin_right = 124.0
 margin_bottom = 42.0
 theme = ExtResource( 6 )
-text = "追跡型A"
+pressed = true
+group = ExtResource( 7 )
+text = "常に追跡"
 
-[node name="CheckBox2" type="CheckBox" parent="UILayer/VBoxContainer"]
+[node name="CheckBox2" type="CheckBox" parent="UILayer/TrackingRadio"]
 margin_top = 46.0
-margin_right = 116.0
+margin_right = 124.0
 margin_bottom = 88.0
 theme = ExtResource( 6 )
-text = "追跡型B"
+group = ExtResource( 7 )
+text = "一定間隔"
 
-[node name="CheckBox3" type="CheckBox" parent="UILayer/VBoxContainer"]
+[node name="CheckBox3" type="CheckBox" parent="UILayer/TrackingRadio"]
 margin_top = 92.0
-margin_right = 116.0
+margin_right = 124.0
 margin_bottom = 134.0
 theme = ExtResource( 6 )
+group = ExtResource( 7 )
 text = "追跡型C"
+
+[connection signal="toggled" from="UILayer/TrackingRadio/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="UILayer/TrackingRadio/CheckBox2" to="." method="_on_CheckBox2_toggled"]

@@ -7,12 +7,24 @@ const TIMER_APPEAR = 1.0
 var _velocity = Vector2.ZERO
 var _timer = 0.0
 var _vel_knockback = Vector2.ZERO
+var _collision:CollisionShape2D = null
 
+
+func setup(col:CollisionShape2D) -> void:
+	_collision = col
+func get_collision_radius() -> float:
+	var shape:Shape2D = _collision.shape
+	if shape is CircleShape2D:
+		return shape.radius / 2.0
+	return 0.0
+	
+## 速度を設定.
 func set_velocity(deg:float, spd:float) -> void:
 	var rad = deg2rad(deg)
 	_velocity.x = spd * cos(rad)
 	_velocity.y = spd * -sin(rad)
 
+## 出現演出の更新.
 func _update_appear(spr:Sprite, delta:float) -> bool:
 	_timer += delta
 	_timer = min(TIMER_APPEAR, _timer)
@@ -32,6 +44,24 @@ func _update_knockback(delta:float) -> bool:
 	if length > 5:
 		return true # ノックバック中.
 	return false
+
+## 重なりを解消する.
+func _collide_enemy() -> void:
+	for enemy in Common.get_layer("enemy").get_children():
+		var e:Enemy = enemy
+		if get_instance_id() == e.get_instance_id():
+			continue # 自分自身を除外.
+		var d = e.position - position
+		var length = d.length()
+		var r1 = get_collision_radius()
+		var r2 = e.get_collision_radius()
+		var dist = (r1 + r2) - length
+		if dist < 0:
+			continue # 衝突していない.
+		
+		# 押し戻す.
+		d = d.normalized()
+		position += d * (-dist)
 
 func _damage(area:Area2D) -> void:
 	if area is Shot:
