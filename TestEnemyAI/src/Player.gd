@@ -8,7 +8,7 @@ class_name Player
 # ----------------------------------------
 # preload.
 # ----------------------------------------
-const SHOT_OBJ = preload("res://assets/tres/Shot.tscn")
+const SHOT_OBJ = preload("res://src/Shot.tscn")
 
 # ----------------------------------------
 # consts.

@@ -50,6 +50,7 @@ func _update_main(delta:float) -> void:
 			_interval_timer += delta
 			if _interval_timer > 5.0:
 				var aim = Common.get_aim(position)
+				_bullet(aim, 300)
 				set_velocity(aim, MOVE_SPEED*10)
 				_interval_timer = 0.0
 				_spr.rotation_degrees = 0.0

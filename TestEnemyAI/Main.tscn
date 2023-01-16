@@ -41,6 +41,8 @@ position = Vector2( 678, 465 )
 
 [node name="ShotLayer" type="CanvasLayer" parent="."]
 
+[node name="BulletLayer" type="CanvasLayer" parent="."]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="TrackingRadio" type="VBoxContainer" parent="UILayer"]
