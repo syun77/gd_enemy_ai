@@ -29,6 +29,7 @@ texture = ExtResource( 1 )
 position = Vector2( 96, 192 )
 
 [node name="EnemyLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Tako" parent="EnemyLayer" instance=ExtResource( 5 )]
 position = Vector2( 528, 392 )
@@ -40,10 +41,13 @@ position = Vector2( 769, 206 )
 position = Vector2( 678, 465 )
 
 [node name="ShotLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="BulletLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="TrackingRadio" type="VBoxContainer" parent="UILayer"]
 margin_left = 896.0

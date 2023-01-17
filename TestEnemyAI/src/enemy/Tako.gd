@@ -50,7 +50,6 @@ func _update_main(delta:float) -> void:
 			_interval_timer += delta
 			if _interval_timer > 5.0:
 				var aim = Common.get_aim(position)
-				_bullet(aim, 300)
 				set_velocity(aim, MOVE_SPEED*10)
 				_interval_timer = 0.0
 				_spr.rotation_degrees = 0.0
@@ -59,8 +58,6 @@ func _update_main(delta:float) -> void:
 				_spr.rotation_degrees += t * 10
 			_velocity *= 0.97
 			position += _velocity * delta
-	
-
 
 func _on_Tako_area_entered(area: Area2D) -> void:
 	_damage(area)

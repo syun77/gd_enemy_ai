@@ -36,6 +36,10 @@ func get_target_pos() -> Vector2:
 func get_aim(pos:Vector2) -> float:
 	var t = get_target_pos()
 	var d = t - pos
+	return rad2deg(atan2(-d.y, d.x))
+func get_aim2(pos:Vector2) -> float:
+	var t = get_target_pos()
+	var d = t - pos
 	return rad2deg(atan2(d.y, d.x))
 
 

@@ -1,4 +1,4 @@
-extends Sprite
+extends Area2D
 
 # ========================================
 # プレイヤー.
@@ -15,6 +15,11 @@ const SHOT_OBJ = preload("res://src/Shot.tscn")
 # ----------------------------------------
 const MOVE_SPEED = 100.0
 const SHOT_INTERVAL = 60 * 2
+
+# ----------------------------------------
+# onready.
+# ----------------------------------------
+onready var _spr = $Sprite
 
 # ----------------------------------------
 # vars.
@@ -39,7 +44,8 @@ func _ready() -> void:
 	_target = position
 	for i in range(8):
 		var spr = Sprite.new()
-		spr.texture = texture
+		spr.scale = _spr.scale
+		spr.texture = _spr.texture
 		spr.hframes = 3
 		spr.modulate.a = 1.0 - i * (1.0 / 7)
 		spr.material = load("res://assets/tres/ghost_material.tres")
@@ -89,12 +95,12 @@ func _process(delta: float) -> void:
 	# ゴーストの更新.
 	_update_ghost(delta)
 
-	flip_h = _is_left
+	_spr.flip_h = _is_left
 
 	if int(_timer * 2) % 2 == 0:
-		frame = 0
+		_spr.frame = 0
 	else:
-		frame = 1
+		_spr.frame = 1
 
 ## ショットの更新.
 func _update_shot() -> void:
@@ -130,7 +136,7 @@ func _search_target() -> Enemy:
 ## 残像の位置の更新.
 func _update_ghost(delta:float) -> void:
 	# ルートノードの相対座標なので (0, 0) から開始する.
-	var flip = flip_h
+	var flip = _spr.flip_h
 	var prev = Vector2.ZERO
 	for i in range(_ghost_list.size()):
 		var spr:Sprite = _ghost_list[i]

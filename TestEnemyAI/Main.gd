@@ -23,7 +23,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_update_bg(delta)
 
-
 func _update_bg(delta:float) -> void:
 	var center = Vector2(1024/2, 600/2)
 	var d = _player.position - center
@@ -32,12 +31,9 @@ func _update_bg(delta:float) -> void:
 	_bg_back.offset += (back_ofs - _bg_back.offset) * delta * 3
 	_bg_sky.offset += (sky_ofs - _bg_sky.offset) * delta * 3
 
-
-
 func _on_CheckBox_toggled(button_pressed: bool) -> void:
 	if button_pressed:
 		Common.tracking = Common.eTracking.ALWAYS
-
 
 func _on_CheckBox2_toggled(button_pressed: bool) -> void:
 	if button_pressed:
