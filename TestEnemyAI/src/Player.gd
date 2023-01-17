@@ -26,6 +26,7 @@ onready var _spr = $Sprite
 # ----------------------------------------
 var _target = Vector2.ZERO
 var _velocity = Vector2.ZERO
+var _direction = 0.0
 var _last_direction = Vector2.ZERO
 var _vel_dash = Vector2.ZERO
 var _timer = 0.0
@@ -36,6 +37,11 @@ var _shot_interval = 0
 # ----------------------------------------
 # public functions.
 # ----------------------------------------
+func get_velocity() -> Vector2:
+	return _velocity
+
+func get_direction() -> float:
+	return _direction
 
 # ----------------------------------------
 # private functions.
@@ -73,6 +79,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_down"):
 		v += Vector2.DOWN
 	v = v.normalized()
+	if v.length() > 0:
+		_direction = rad2deg(atan2(-v.y, v.x))
 	_last_direction = v
 	
 	_vel_dash *= 0.95
