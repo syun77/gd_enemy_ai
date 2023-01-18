@@ -58,7 +58,15 @@ func get_aim2(pos:Vector2) -> float:
 	var d = t - pos
 	return rad2deg(atan2(d.y, d.x))
 
-
+func clip_screen(node:Node2D) -> void:
+	if node.position.x < 0:
+		node.position.x = 0
+	if node.position.x > 1024:
+		node.position.x = 1024
+	if node.position.y < 0:
+		node.position.y = 0
+	if node.position.y > 600:
+		node.position.y = 600	
 
 func set_layer(layers) -> void:
 	_layers = layers

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/images/bg_back.png" type="Texture" id=2]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Main.gd" type="Script" id=4]
-[ext_resource path="res://src/enemy/Tako.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/enemy/Nasu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/tres/radio.tres" type="Theme" id=6]
 [ext_resource path="res://assets/tres/radio_group.tres" type="ButtonGroup" id=7]
 
@@ -31,14 +31,14 @@ position = Vector2( 96, 192 )
 [node name="EnemyLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Tako" parent="EnemyLayer" instance=ExtResource( 5 )]
-position = Vector2( 528, 392 )
+[node name="Nasu" parent="EnemyLayer" instance=ExtResource( 5 )]
+position = Vector2( 226, 265 )
 
-[node name="Tako2" parent="EnemyLayer" instance=ExtResource( 5 )]
-position = Vector2( 769, 206 )
+[node name="Nasu2" parent="EnemyLayer" instance=ExtResource( 5 )]
+position = Vector2( 338, 474 )
 
-[node name="Tako3" parent="EnemyLayer" instance=ExtResource( 5 )]
-position = Vector2( 678, 465 )
+[node name="Nasu3" parent="EnemyLayer" instance=ExtResource( 5 )]
+position = Vector2( 705, 290 )
 
 [node name="ShotLayer" type="CanvasLayer" parent="."]
 layer = 2

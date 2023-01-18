@@ -91,14 +91,7 @@ func _process(delta: float) -> void:
 	_velocity = (v * MOVE_SPEED + _vel_dash) * delta
 
 	position += _velocity
-	if position.x < 0:
-		position.x = 0
-	if position.x > 1024:
-		position.x = 1024
-	if position.y < 0:
-		position.y = 0
-	if position.y > 600:
-		position.y = 600
+	Common.clip_screen(self)
 	
 	# ゴーストの更新.
 	_update_ghost(delta)

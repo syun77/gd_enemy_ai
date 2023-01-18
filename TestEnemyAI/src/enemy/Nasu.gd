@@ -14,6 +14,12 @@ enum eState {
 	MAIN,
 }
 
+enum eAI {
+	STANDBY,
+	RANDOM,
+	ESCAPE
+}
+
 # --------------------------
 # onready.
 # --------------------------
@@ -24,6 +30,7 @@ onready var _spr = $Sprite
 # --------------------------
 var _state = eState.APPEAR
 var _interval_timer = 0.0
+var _ai = eAI.STANDBY
 
 # --------------------------
 # private functions.
@@ -54,19 +61,30 @@ func _physics_process(delta: float) -> void:
 func _update_main(delta:float) -> void:
 	_timer += delta
 	
-	modulate = Color.blue
+	_spr.modulate = Color.white
 	if _check_escape():
 		var d = position - Common.get_target_pos()
-		modulate = Color.cyan
+		_spr.modulate = Color.blue
 		# 逃走モード.
 		d = d.normalized()
 		_velocity = d * MOVE_SPEED
 		_timer = 0
+		_ai = eAI.ESCAPE
 	
-	_update_random_move()
+	if _update_random_move():
+		_ai = eAI.RANDOM
 	
 	_velocity *= 0.97
 	position += _velocity * delta
+	Common.clip_screen(self)
+
+	# 回転アニメーション.
+	match _ai:
+		eAI.STANDBY:
+			rotation += 0.01 * sin(_timer*4)
+		_:
+			if _velocity.length() < 10:
+				_ai = eAI.STANDBY
 	
 
 ## 近づいてきたかどうか.
@@ -93,12 +111,17 @@ func _check_escape() -> bool:
 		
 	return true
 
-func _update_random_move() -> void:
+func _update_random_move() -> bool:
 	var spd = _velocity.length()
 	if _timer > 4.0 and spd < 10:
 		_timer = 0.0
 		var rnd = rand_range(0.0, 360.0)
 		set_velocity(rnd, MOVE_SPEED)
+		
+		return true # 動いた.
+	
+	# 動いていない.
+	return false
 
 
 func _on_Tako_area_entered(area: Area2D) -> void:
