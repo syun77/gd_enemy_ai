@@ -3,6 +3,8 @@ extends Node
 # -------------------------------------
 # consts.
 # -------------------------------------
+const RANGE_ESCAPE = 200.0
+
 # 追跡型.
 enum eTracking {
 	ALWAYS,

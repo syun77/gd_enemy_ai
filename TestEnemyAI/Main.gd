@@ -9,7 +9,7 @@ onready var _player = $MainLayer/Player
 
 func _ready() -> void:
 	
-	OS.set_window_size(Vector2(1024/4, 600/4))
+	#OS.set_window_size(Vector2(1024/4, 600/4))
 	
 	Common.set_target(_player)
 	

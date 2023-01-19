@@ -102,6 +102,9 @@ func _process(delta: float) -> void:
 		_spr.frame = 0
 	else:
 		_spr.frame = 1
+	
+	# 描画の更新.
+	update()
 
 ## ショットの更新.
 func _update_shot() -> void:
@@ -156,3 +159,8 @@ func _shot(deg:float, spd:float) -> void:
 	s.position = position
 	s.set_velocity(deg, spd)
 	Common.get_layer("shot").add_child(s)
+
+func _draw() -> void:
+	var c = Color.blue
+	c.a = 0.1
+	draw_circle(Vector2.ZERO, Common.RANGE_ESCAPE, c)

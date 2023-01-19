@@ -98,10 +98,10 @@ func _check_escape() -> bool:
 		return false # 範囲外.
 
 	var dist = d.length()
-	if dist > 300:
+	if dist > Common.RANGE_ESCAPE:
 		return false # 距離が遠い.
 	
-	if dist < 100:
+	if dist < Common.RANGE_ESCAPE * 0.5:
 		return true # 近いので逃げる.
 	
 	var spd = v.length()
